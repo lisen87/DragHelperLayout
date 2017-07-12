@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.qiaotongtianxia.draghelperlayout.DragHelperLayout
+        android:id="@+id/dragLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:dragViewIndex="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="DragHelperLayout"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="DragHelpeDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutrLayout"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="DragHelpeDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutrLayout"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="DragHelpeDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutrLayout"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="DragHelpeDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutrLayout"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="DragHelpeDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutrLayout"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="DragHelpeDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutDragHelperLayoutrLayout"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16sp" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            android:visibility="visible"/>
+    </com.qiaotongtianxia.draghelperlayout.DragHelperLayout>
+
+
+</LinearLayout>
