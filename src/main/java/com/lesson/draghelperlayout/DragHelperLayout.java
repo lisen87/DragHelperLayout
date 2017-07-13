@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
  * Created by Administrator on 2017/7/10.
  * lisen
  * 内部布局可回弹
+ *
  */
 
 public class DragHelperLayout extends RelativeLayout{
