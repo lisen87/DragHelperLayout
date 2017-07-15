@@ -23,6 +23,10 @@ public class DragHelperLayout extends RelativeLayout{
 
 
     private static  String TAG = "DragHelperLayout";
+    private static final int NORMAL = 0;
+    private static final int PULL_DOWN = 1;
+    private static final int PULL_UP = 2;
+    private int state = NORMAL;
     /**
      * 可回弹的控件在xml中的位置
      */
@@ -68,6 +72,8 @@ public class DragHelperLayout extends RelativeLayout{
         height = getMeasuredHeight();
     }
 
+
+
     private int lastY;
     private int touchLastY;
     private boolean isAnima = false;
@@ -89,17 +95,28 @@ public class DragHelperLayout extends RelativeLayout{
                     if ( Math.abs(lastY) < Math.abs(ev.getY()) && listener.isCanPullDown() ){
                         //可以下拉并且是向下滑动
                         intercept = true;
+                        state = PULL_DOWN;
                     }else if (  Math.abs(lastY) > Math.abs(ev.getY()) && listener.isCanPullUp()){
                         //可以上啦并且是向上滑动
                         intercept = true;
+                        state = PULL_UP;
                     }else{
-                        if (!normal.isEmpty()){
-                            animation();
+                        if (normal.contains(normal.left,dragView.getTop()+10,normal.right,dragView.getBottom() - 10)){
+                            //如果慢慢的回滑，将布局恢复，如果直接调用animation()；会造成时间分发失败
+                            dragView.layout(normal.left,normal.top,normal.right,normal.bottom);
+                            normal.setEmpty();
+                        }else{
+                            //此处是为了优化用户体验，不至于在内部控件被拖拽后快速反方向滑动早成的闪烁
+                            if (!normal.isEmpty()){
+                                animation();
+                            }
                         }
                         intercept = false;
+                        state = NORMAL;
                     }
                 }else{
                     intercept = false;
+                    state = NORMAL;
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -124,6 +141,7 @@ public class DragHelperLayout extends RelativeLayout{
                 break;
             case MotionEvent.ACTION_UP:
                 y = 0;
+                state = NORMAL;
                 if (!normal.isEmpty()) {
                     animation();
                 }
@@ -134,23 +152,13 @@ public class DragHelperLayout extends RelativeLayout{
                 if (normal.isEmpty()) {
                     normal.set(dragView.getLeft(), dragView.getTop(), dragView.getRight(), dragView.getBottom());
                 }
-                if (dragView.getBottom() >1) {
-                    dragView.layout(dragView.getLeft(), dragView.getTop() - dy / 2, dragView.getRight(), dragView.getBottom() - dy / 2);
-                }else {
-                    //不处理布局移出屏幕会无法回到原位
-//                    dragView.layout(dragView.getLeft(), dragView.getTop() - dy / 2, dragView.getRight(), 1);
-                }
-                if (dragView.getTop() <= 0 ||dragView.getTop() >= height){//当整个控件都被上、下啦超出屏幕，重新分发事件
+                dragView.layout(dragView.getLeft(), dragView.getTop() - dy / 2, dragView.getRight(), dragView.getBottom() - dy / 2);
+                if (state == PULL_DOWN && dragView.getTop() <= normal.top
+                        ||state == PULL_UP && dragView.getBottom() >= normal.bottom){//被拖拽后回滑，重新分发事件
                     ev.setAction(MotionEvent.ACTION_CANCEL);
                     MotionEvent motionEvent = MotionEvent.obtain(ev);
-                    dispatchTouchEvent(ev);
                     motionEvent.setAction(MotionEvent.ACTION_DOWN);
                     return dispatchTouchEvent(motionEvent);
-                }
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                if (!normal.isEmpty() && (dragView.getBottom() <= 1||dragView.getTop() >= height)) {
-                    animation();
                 }
                 break;
         }
@@ -160,6 +168,12 @@ public class DragHelperLayout extends RelativeLayout{
 
 
     private void animation() {
+
+        //整个控件被拖出屏幕后，动画会无法执行，先刷新一下父布局就可以解决
+        if (dragView.getTop() >= height || dragView.getBottom() <= 0){
+            invalidate();
+        }
+
         TranslateAnimation ta = new TranslateAnimation(0, 0, 0, normal.bottom - dragView.getBottom());
         ta.setInterpolator(new DecelerateInterpolator(0.6f));
         ta.setDuration(400);
@@ -167,6 +181,7 @@ public class DragHelperLayout extends RelativeLayout{
             @Override
             public void onAnimationStart(Animation animation) {
                 isAnima = true;
+
             }
             @Override
             public void onAnimationRepeat(Animation animation) {}
