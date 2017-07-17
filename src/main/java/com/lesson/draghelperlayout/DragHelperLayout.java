@@ -51,6 +51,7 @@ public class DragHelperLayout extends RelativeLayout{
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.getTheme().obtainStyledAttributes(attrs,R.styleable.DragHelperLayout,defStyleAttr,0);
         dragViewIndex = typedArray.getInt(R.styleable.DragHelperLayout_dragViewIndex,0);
+        typedArray.recycle();
     }
 
     @Override
